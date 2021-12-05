@@ -1,0 +1,37 @@
+{% extends 'partials/base.html'%}
+{%block title%}
+Detail {{thread.id}}
+{% endblock%}
+
+{% block content%}
+<div class="container">
+<h1 class="pt-3 ps-3">Post #{{thread.id}}</h1>
+
+<div class="card mt-3">
+  <div class="card-header">
+    {{thread.subject}}
+  </div>
+<div class="card-body mt-3">
+<figure>
+  <blockquote class="blockquote">
+    <p>{{thread.content}} </p>
+  </blockquote>
+  <figcaption class="blockquote-footer">
+    since {{thread.date | timesince }} ago by <cite title="username">{{thread.creator.username}}</cite>
+  </figcaption>
+  {% if user.is_staff%}
+  <a href="#">Delete</a>
+  {%endif%}
+  {%for com in thread.comment_set.all%}
+  <ul>
+    <li class="list-group-item">{{com.content}} <small><em>since {{com.date | timesince }} ago by {{com.creator.username}}</em></small></li>
+  </ul>
+  {%endfor%}
+
+</figure>
+
+  </div>
+</div>
+</div>
+
+{% endblock %}

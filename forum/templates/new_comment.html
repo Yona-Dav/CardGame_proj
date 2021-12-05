@@ -1,0 +1,17 @@
+{% extends 'partials/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+New Thread
+{% endblock %}
+
+{% block content %}
+<div class="container me-5 ms-5 ">
+    <h1 class="d-flex justify-content-center">Comment</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button "Comment" button_type="submit" button_class="btn-success" %}
+    </form>
+</div>
+{% endblock %}

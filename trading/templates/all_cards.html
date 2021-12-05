@@ -1,0 +1,26 @@
+{% extends 'partials/base.html'%}
+{%block title%}
+Cards
+{% endblock%}
+{% block content%}
+<div class="container">
+<h1 class="pt-3 ps-3 d-flex justify-content-evenly">All the cards</h1>
+  <div class="row d-flex justify-content-evenly ">
+{%for card in cards%}
+
+<div class="card" style="width: 18rem;">
+  <img src="{{card.image}}" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">{{card.name.upper}} #{{card.card_id}}</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">rarity: {{card.rarity}}</li>
+  </ul>
+    <a href="#" class="card-link d-flex flex-column btn btn-warning">Sell the card</a>
+</div>
+
+{% endfor %}
+</div>
+
+</div>
+{% endblock %}

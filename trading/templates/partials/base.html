@@ -1,0 +1,32 @@
+{% load bootstrap5 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Card Game {% block title %}{% endblock %}</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    {% block css %}
+
+    {% endblock %}
+
+</head>
+<body>
+{% include 'partials/navbar.html' %}
+
+<div class="mt-5">
+{% block content %}
+
+{% endblock %}
+</div>
+
+{% include 'partials/footer.html' %}
+{% block js %}
+
+{% endblock %}
+</body>
+</html>

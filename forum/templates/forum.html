@@ -1,0 +1,41 @@
+{% extends 'partials/base.html'%}
+{%block title%}
+Forum
+{% endblock%}
+{% block content%}
+<div class="container">
+<h1 class="pt-3 ps-3">Forum</h1>
+  <a href="{% url 'new_thread' %}" class="btn btn-warning">New Post</a>
+{%for th in threads%}
+<div class="card mt-3">
+  <div class="card-header">
+    {{th.subject}}
+  </div>
+<div class="card-body mt-3">
+<figure>
+  <blockquote class="blockquote">
+    <p>{{th.content}} </p>
+  </blockquote>
+  <figcaption class="blockquote-footer">
+    since {{th.date | timesince }} ago by <cite title="username">{{th.creator.username}}</cite>
+  </figcaption>
+  {% if user.is_staff%}
+  <a href="#">Delete</a>
+  {%endif%}
+  {%for com in th.comment_set.all%}
+  <ul>
+    <li class="list-group-item">{{com.content}} <small><em>since {{com.date | timesince }} ago by {{com.creator.username}}</em></small></li>
+  </ul>
+  {%endfor%}
+
+</figure>
+
+
+  <a href="{% url 'new_comment' th.id %}"><button>Comment</button></a>
+  <a href="{% url 'view_post' th.id %}"><button>View Post</button></a>
+  </div>
+  {%endfor%}
+</div>
+</div>
+
+{% endblock %}

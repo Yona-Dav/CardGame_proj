@@ -1,0 +1,26 @@
+{% extends 'partials/base.html'%}
+{% load bootstrap5 %}
+{% block title %}
+Profile
+{% endblock %}
+{%block content%}
+<div class="container">
+ <div class="row">
+{% if request.user.is_authenticated %}
+<div class="card">
+  <h5 class="card-header">My Profile</h5>
+  <div class="card-body">
+    <img src="{{request.user.profile.image}}" class="border-radius-50 profile-img">
+    <p class="card-text">Username: {{request.user.username}}</p>
+    <p class="card-text">First Name: {{request.user.first_name}}</p>
+    <p class="card-text">Last Name: {{request.user.last_name}}</p>
+    <p class="card-text">Email: {{request.user.email}}</p>
+    <p  class="card-text">Type: {{request.user.profile.type.name}}</p>
+    <p  class="card-text">Number of points: {{request.user.profile.number_points}}</p>
+  </div>
+</div>
+   <a href="{% url 'update_profile' %}" class="btn btn-warning">Update Picture</a>
+{%endif%}
+</div>
+  </div>
+{% endblock %}
