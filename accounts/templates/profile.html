@@ -7,10 +7,11 @@ Profile
 <div class="container">
  <div class="row">
 {% if request.user.is_authenticated %}
+  <div class="col-5" >
 <div class="card">
   <h5 class="card-header">My Profile</h5>
   <div class="card-body">
-    <img src="{{request.user.profile.image}}" class="border-radius-50 profile-img">
+    <img src="/media/{{request.user.profile.image}}" height='300vh' width="250vw" class="border-radius-90 profile-img rounded">
     <p class="card-text">Username: {{request.user.username}}</p>
     <p class="card-text">First Name: {{request.user.first_name}}</p>
     <p class="card-text">Last Name: {{request.user.last_name}}</p>
@@ -20,6 +21,7 @@ Profile
   </div>
 </div>
    <a href="{% url 'update_profile' %}" class="btn btn-warning">Update Picture</a>
+    </div>
 {%endif%}
 </div>
   </div>
