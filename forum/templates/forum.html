@@ -3,6 +3,11 @@
 Forum
 {% endblock%}
 {% block content%}
+{%if messages%}
+{%for message in messages%}
+<div class="alert alert-warning">{{message}}<br></div>
+{%endfor%}
+{%endif%}
 <div class="container">
 <h1 class="pt-3 ps-3">Forum</h1>
   <a href="{% url 'new_thread' %}" class="btn btn-warning">New Post</a>
@@ -20,7 +25,7 @@ Forum
     since {{th.date | timesince }} ago by <cite title="username">{{th.creator.username}}</cite>
   </figcaption>
   {% if user.is_staff%}
-  <a href="#">Delete</a>
+  <a href="{% url 'delete_thread' th.id%}">Delete</a>
   {%endif%}
   {%for com in th.comment_set.all%}
   <ul>

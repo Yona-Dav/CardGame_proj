@@ -20,7 +20,7 @@ class Card(models.Model):
 
 class Deck(models.Model):
     user = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    card = models.ManyToManyField(Card, related_name='deck')
+    card = models.ManyToManyField(Card)
 
 
 class Transaction(models.Model):
@@ -29,6 +29,14 @@ class Transaction(models.Model):
     user_sell = models.ForeignKey(Profile, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     status = models.CharField(choices=STATUS, default='S', max_length=30)
+
+
+class Offer(models.Model):
+    STATUS = [('A', 'Accepted'), ('P', 'Pending'), ('R', 'Refused')]
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    status = models.CharField(choices=STATUS, default='P', max_length=30)
 
 
 

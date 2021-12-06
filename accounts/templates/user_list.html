@@ -1,0 +1,29 @@
+{% extends 'partials/base.html'%}
+{% load bootstrap5 %}
+{% block title %}
+Profile
+{% endblock %}
+{%block content%}
+{%if messages%}
+{%for message in messages%}
+<div class="alert alert-warning">{{message}}<br></div>
+{%endfor%}
+{%endif%}
+<div class="container">
+   <div class="row">
+     {% for user in users %}
+     <div class="col-6">
+<div class="card">
+  <h5 class="card-header">User #{{user.id}} <a href="{% url 'delete_user' user.id%}">delete user</a></h5>
+  <div class="card-body">
+    <p class="card-text">Username: {{user.username}}</p>
+    <p class="card-text">First Name: {{user.first_name}}</p>
+    <p class="card-text">Last Name: {{user.last_name}}</p>
+  </div>
+</div>
+    </div>
+
+{% endfor %}
+</div>
+</div>
+{% endblock %}

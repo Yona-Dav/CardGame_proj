@@ -1,0 +1,9 @@
+{% extends 'partials/base.html'%}
+{%block title%}
+Error
+{% endblock%}
+{% block content%}
+<h2>You don't have this card in your desk</h2>
+<a href="{% url 'transactions'%}" class="btn btn-warning">Make another transaction</a>
+<a href="{% url 'my_deck'%}" class="btn btn-warning">Go back to my deck</a>
+{% endblock %}

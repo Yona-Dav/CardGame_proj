@@ -49,8 +49,3 @@ def populate_card(number):
                 rarity = 0
 
             card = Card.objects.create(card_id=id, name=name, rarity=rarity, image=image)
-
-
-# response = requests.get(f'https://pokeapi.co/api/v2/pokemon/10/')
-# if response.status_code == 200:
-#     data = response.json()

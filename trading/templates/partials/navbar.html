@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-warning">
+<nav class="navbar navbar-expand-lg navbar-light bg-warning">
     <!--    contain this   -->
   <div class="container-fluid">
     <a class="navbar-brand" href="#">CARD GAME</a>
@@ -8,23 +8,33 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Homepage</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">Homepage</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="#">Desk</a>
+          <a class="nav-link" href="{% url 'my_deck' %}">Deck</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Transaction</a>
+          <a class="nav-link" href="{% url 'transactions' %}">Transaction</a>
         </li>
          <li class="nav-item">
           <a class="nav-link" href="{% url 'forum' %}">Forum</a>
         </li>
           <li class="nav-item">
-          <a class="nav-link" href="#">Leave a review</a>
+          <a class="nav-link" href="{% url 'all_cards'%}">All the cards</a>
         </li>
         <li class="nav-item">
             {% if user.is_authenticated %}
           <a class="nav-link" href="{% url 'profile' user.id %}">Profile</a>
+            {% endif%}
+        </li>
+        <li class="nav-item">
+            {% if user.is_staff %}
+          <a class="nav-link" href="{% url 'all_profiles' %}">All the Profiles</a>
+            {% endif%}
+        </li>
+        <li class="nav-item">
+            {% if user.is_staff %}
+          <a class="nav-link" href="{% url 'all_users' %}">Users</a>
             {% endif%}
         </li>
       </ul>

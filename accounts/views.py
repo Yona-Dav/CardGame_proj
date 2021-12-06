@@ -6,8 +6,9 @@ from .models import User, Profile
 from .forms import SignupForm, MyAuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -46,5 +47,46 @@ class ViewProfile(DetailView):
     template_name = 'profile.html'
 
 
+class ProfileViewList(ListView, UserPassesTestMixin):
+    model = Profile
+    template_name = 'profile_list.html'
+    context_object_name = 'profiles'
+
+    def test_func(self):
+        return self.request.user.is_staff
 
 
+class DeleteProfile(DeleteView, UserPassesTestMixin):
+    model = Profile
+    template_name = 'delete_view.html'
+    success_url = reverse_lazy('all_profiles')
+    success_message = "The profile was deleted successfully"
+
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        messages.success(self.request, self.success_message  % obj.__dict__)
+        return super(DeleteProfile, self).delete(request, *args, **kwargs)
+
+
+class UserViewList(ListView, UserPassesTestMixin):
+    model = User
+    template_name = 'user_list.html'
+    context_object_name = 'users'
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class DeleteUser(DeleteView, UserPassesTestMixin):
+    model = User
+    template_name = 'delete_view.html'
+    success_url = reverse_lazy('all_users')
+    success_message = "The user was deleted successfully"
+
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        messages.success(self.request, self.success_message  % obj.__dict__)
+        return super(DeleteUser, self).delete(request, *args, **kwargs)
+
+    def test_func(self):
+        return self.request.user.is_staff

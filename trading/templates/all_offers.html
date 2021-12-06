@@ -1,0 +1,40 @@
+{% extends 'partials/base.html'%}
+{%block title%}
+Offers
+{% endblock%}
+{% block content%}
+<div class="container">
+<div class="row">
+<h1 class="pt-3 ps-3 d-flex justify-content-evenly">All the offers for {{transaction.card.name.upper}}</h1>
+  <div class="row d-flex justify-content-evenly ">
+
+<div class="card mt-3" style="width: 18rem;">
+  <img src="{{transaction.card.image}}" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">{{transaction.card.name.upper}} #{{transaction.card.card_id}}</h5>
+    <p class="card-text">Seller: {{transaction.user_sell.user.username}} </p>
+    <p class="card-text"> since {{transaction.timestamp | timesince}} ago</p>
+  </div>
+</div>
+    <p><hr></p>
+</div>
+
+
+{%for offer in transaction.offer_set.all%}
+{% if offer.status == 'P'%}
+
+<div class="card mt-3" style="width: 18rem;">
+  <img src="{{offer.card.image}}" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">{{offer.card.name.upper}} #{{offer.card.card_id}}</h5>
+    <p class="card-text">Offered by {{offer.buyer.user.username}}</p>
+    <a href="{% url 'action' offer.id 1 %}" class="btn btn-success">Accepted</a>
+    <a href="{% url 'action' offer.id 0 %}" class="btn btn-danger">Rejected</a>
+  </div>
+</div>
+{%endif%}
+{% endfor %}
+</div>
+
+</div>
+{% endblock %}

@@ -5,6 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .forms import ThreadForm
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib import messages
 # Create your views here.
 
 
@@ -52,4 +54,18 @@ class ThreadDetailView(DetailView):
     model = Thread
     template_name = 'view_thread.html'
 
+
+class DeleteThread(DeleteView, UserPassesTestMixin):
+    model = Thread
+    template_name = 'delete_view.html'
+    success_url = reverse_lazy('forum')
+    success_message = "The thread was deleted successfully"
+
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        messages.success(self.request, self.success_message  % obj.__dict__)
+        return super(DeleteThread, self).delete(request, *args, **kwargs)
+
+    def test_func(self):
+        return self.request.user.is_staff
 

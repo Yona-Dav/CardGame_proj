@@ -1,0 +1,18 @@
+{% extends 'partials/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+Make an offer
+{% endblock %}
+
+{% block content %}
+
+<div class="container me-5 ms-5  ">
+    <h1 class="d-flex justify-content-center">Make an Offer</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button "Make an offer" button_type="submit" button_class="btn-success" %}
+    </form>
+</div>
+{% endblock %}

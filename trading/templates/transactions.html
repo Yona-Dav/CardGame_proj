@@ -1,0 +1,37 @@
+{% extends 'partials/base.html'%}
+{%block title%}
+Cards
+{% endblock%}
+{% block content%}
+<div class="container">
+<h1 class="pt-3 ps-3 d-flex justify-content-evenly">All the Transactions</h1>
+  <div class="row d-flex justify-content-evenly ">
+
+{%for transaction in transactions%}
+{% if transaction.status == 'S'%}
+
+<div class="card mt-3" style="width: 18rem;">
+  <img src="{{transaction.card.image}}" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">{{transaction.card.name.upper}} #{{transaction.card.card_id}}</h5>
+    <p class="card-text">Seller: <a href="{%url 'profile' user.id% }">{{transaction.user_sell.user.username}}</a></p>
+    <p class="card-text"> since {{transaction.timestamp | timesince}} ago</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">rarity: {{transaction.card.rarity}}</li>
+    {% if user.profile == transaction.user_sell%}
+    <a href="{% url 'remove_transaction' transaction.id %}">remove card from transactions</a>
+    {%endif%}
+  </ul>
+  {% if not user.profile == transaction.user_sell%}
+  <a href="{% url 'new_offer' transaction.id %}" class="card-link d-flex flex-column btn btn-danger">Make an offer</a>
+  {% else %}
+  <a href="{% url 'all_offers' transaction.id%}" class="card-link d-flex flex-column btn btn-warning">View offers</a>
+  {% endif %}
+</div>
+{%endif%}
+{% endfor %}
+</div>
+
+</div>
+{% endblock %}
