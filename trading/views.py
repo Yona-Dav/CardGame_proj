@@ -70,6 +70,12 @@ class OfferCreateView(LoginRequiredMixin, CreateView):
             return HttpResponseRedirect(self.get_success_url())
         return render(self.request, 'not_have.html')
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['card'].queryset = self.request.user.profile.deck.card.all()
+        return form
+
+
 
 class OfferView(LoginRequiredMixin, DetailView):
     model = Transaction

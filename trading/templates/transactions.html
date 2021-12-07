@@ -14,7 +14,7 @@ Cards
   <img src="{{transaction.card.image}}" class="card-img-top">
   <div class="card-body">
     <h5 class="card-title">{{transaction.card.name.upper}} #{{transaction.card.card_id}}</h5>
-    <p class="card-text">Seller: <a href="{%url 'profile' user.id% }">{{transaction.user_sell.user.username}}</a></p>
+    <p class="card-text">Seller: <a href="{%url 'profile' transaction.user_sell.user.id%}">{{transaction.user_sell.user.username}}</a></p>
     <p class="card-text"> since {{transaction.timestamp | timesince}} ago</p>
   </div>
   <ul class="list-group list-group-flush">
