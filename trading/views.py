@@ -93,7 +93,6 @@ def transaction_action(request, offer_id, accepted):
         transaction.status = 'E'
         offer.save()
         transaction.save()
-        deck_seller.card.remove(transaction.card)
         deck_buyer.card.add(transaction.card)
         deck_seller.card.add(offer.card)
         deck_buyer.card.remove(offer.card)
