@@ -8,10 +8,11 @@ Update profile
 <div class="container me-5 ms-5 ">
     <h1 class="d-flex justify-content-center">More info about you</h1>
 
-    <form method="post" class="d-flex flex-column " enctype="multipart/form-data">
+    <form method="post"  enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% bootstrap_button "Update" button_type="submit" button_class="btn-success" %}
+        {% bootstrap_button "Skip" button_type="submit" button_class="btn-warning" %}
     </form>
 </div>
 {% endblock %}

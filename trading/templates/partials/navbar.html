@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-warning">
     <!--    contain this   -->
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">CARD GAME</a>
+    <a class="navbar-brand btn btn-danger" href="#">CARD GAME</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -43,17 +43,17 @@
     {%if not user.is_authenticated %}
         <li class="nav-item">
 
-          <a href="{% url 'login'%}" class="nav-link ">Login</a>
+          <a href="{% url 'login'%}" class="nav-link btn btn-warning">Login</a>
         </li>
             <li class="nav-item">
-          <a href="{% url 'signup'%}" class="nav-link ">Sign Up</a>
+          <a href="{% url 'signup'%}" class="nav-link btn btn-danger">Sign Up</a>
         </li>
         {% else %}
         <li class="nav-item">
           <a class="nav-link ">Login in as <b>{{user.username}}</b></a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'logout'%}" class="nav-link ">Logout</a>
+          <a href="{% url 'logout'%}" class="nav-link btn btn-danger">Logout</a>
         </li>
         {% endif %}
     </ul>
