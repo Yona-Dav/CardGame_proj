@@ -10,6 +10,12 @@ class TypeProfile(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        db_table = 'TypeProfile'
+        constraints = [
+            models.UniqueConstraint(fields=['name'], name='unique name')
+        ]
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
