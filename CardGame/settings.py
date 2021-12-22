@@ -141,9 +141,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'homepage'
 LOGOUT_REDIRECT_URL = 'homepage'
+import os
+import django_heroku
 
 try:
     from.local_settings import *
 except ImportError:
-    raise Exception('A local_settings file MUST exist in order to use this project')
+    django_heroku.settings(locals())
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
